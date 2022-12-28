@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdn.socket.io/socket.io-3.0.1.min.js"></script>
+    <title>클라이언트_2</title>
+  </head>
+
+  <body>
+    <h1>클라이언트_2</h1>
+    <div>
+      <h2>message로 받은 내용</h2>
+      <p class="message_content"></p>
+    </div>
+    <br />
+    <div>
+      <h2>client_2로 받은 내용</h2>
+      <p class="client_2_conent"></p>
+    </div>
+
+    <script>
+      const socket = io("ws://localhost:3000");
+
+      socket.on("connect", () => {
+        socket.send("client_2 접속~!");
+      });
+
+      socket.on("message", (data) => {
+        document.querySelector(".message_content").textContent = data;
+      });
+
+      socket.on("client_2", (data) => {
+        document.querySelector(".client_2_conent").textContent = data;
+      });
+    </script>
+  </body>
+</html>
